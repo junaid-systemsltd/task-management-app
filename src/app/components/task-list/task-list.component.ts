@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/types';
 
 @Component({
@@ -9,4 +9,10 @@ export class TaskListComponent {
   todayDate = new Date();
 
   @Input() taskList: Task[] = [];
+  @Output()
+  deleteTask: EventEmitter<string> = new EventEmitter<string>();
+
+  deleteTaskHandler(id: string) {
+    this.deleteTask.emit(id);
+  }
 }

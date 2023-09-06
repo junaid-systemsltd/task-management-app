@@ -1,0 +1,103 @@
+<button
+  class="custom-btn btn-primary ms-auto"
+  type="button"
+  data-toggle="tooltip"
+  title="Add New Task "
+  data-bs-toggle="modal"
+  data-bs-target="#taskModal"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24"
+    viewBox="0 -960 960 960"
+    width="24"
+  >
+    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+  </svg>
+</button>
+<!--    Modal Add new Task  -->
+<div
+  class="modal"
+  id="taskModal"
+  tabindex="-1"
+  aria-labelledby="taskModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          novalidate
+          #addTaskFormRef="ngForm"
+          (ngSubmit)="addTaskHandler(addTaskFormRef)"
+        >
+          <div class="row g-3">
+            <div class="col-sm-12">
+              <input
+                type="text"
+                class="form-control form-control"
+                name="name"
+                #titleRef="ngModel"
+                placeholder="Name"
+                ngModel
+                required
+              />
+            </div>
+            <div class="col-sm-12">
+              <select
+                class="form-select"
+                name="priority"
+                #statusRef="ngModel"
+                ngModel="low"
+              >
+                <option value="high">High</option>
+                <option value="neutral">Neutral</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+
+            <div class="col-sm-12">
+              <select
+                class="form-select"
+                name="status"
+                #statusRef="ngModel"
+                ngModel="complete"
+              >
+                <option value="complete">Complete</option>
+                <option value="incomplete">InComplete</option>
+              </select>
+            </div>
+            <input
+              type="date"
+              class="form-control form-control"
+              name="date"
+              #dateRef="ngModel"
+              placeholder="Date"
+              ngModel
+              required
+            />
+            <div class="col-sm-12 text-end">
+              <input
+                type="submit"
+                class="btn btn-primary"
+                value="Add"
+                [disabled]="addTaskFormRef.invalid"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

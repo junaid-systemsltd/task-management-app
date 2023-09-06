@@ -1,4 +1,5 @@
 <app-navbar/>
 <div class="container">
-  <app-task-list [taskList]="tasksList" />
+  <app-task-list [taskList]="tasksList" (deleteTask)="deleteTask($event)" />
+  <app-add-task (addTask)="addNewTask($event)" />
 </div>
