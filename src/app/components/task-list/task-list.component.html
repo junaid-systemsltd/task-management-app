@@ -19,13 +19,47 @@
       <tr class="table-light">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ task.name }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.status }}</td>
+        <td>
+          <span
+            class="badge rounded-pill text-uppercase font-weight-bold"
+            [ngClass]="{
+              'bg-primary': task.priority === 'high',
+              'bg-success': task.priority === 'low',
+              'bg-warning': task.priority === 'neutral'
+            }"
+            >{{ task.priority }}
+          </span>
+        </td>
+        <td>
+          <span
+            class="badge text-uppercase"
+            [ngClass]="{
+            'bg-primary': task.status === 'incomplete',
+            'bg-success': task.status === 'complete',
+          }"
+            >{{ task.status }}</span
+          >
+        </td>
         <td>{{ task.date | date: "mediumDate" }}</td>
         <td class="d-flex gap-2">
-          <button type="button" class="btn btn-primary btn-sm">
-            Mark as done
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            *ngIf="task.status === 'complete'; else completeBtn"
+            (click)="updateStatusHandler(task.id)"
+          >
+            Mark as undone
           </button>
+          <ng-template #completeBtn>
+            <button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="updateStatusHandler(task.id)"
+            >
+              Mark as done
+            </button>
+          </ng-template>
+
           <button
             type="button"
             class="btn btn-danger btn-sm"
