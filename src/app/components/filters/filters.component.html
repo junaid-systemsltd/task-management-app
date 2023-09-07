@@ -1,0 +1,27 @@
+<div class="row my-2">
+  <div class="col-md-8">
+    <label>Search by name</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search task..." />
+      <button class="btn btn-primary" type="button" id="button-addon2">
+        Search
+      </button>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Task Status:</label>
+      <select
+        class="form-select"
+        name="status"
+        [(ngModel)]="status"
+        (change)="onChangeHandler($event)"
+      >
+        <option disabled>Select Status:</option>
+        <option value="all">All</option>
+        <option value="complete">Complete</option>
+        <option value="incomplete">Incomplete</option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -6,8 +6,7 @@ import { Task } from 'src/types';
   templateUrl: './task-list.component.html',
 })
 export class TaskListComponent {
-  todayDate = new Date();
-
+  taskStatus: string = 'all';
   @Input() taskList: Task[] = [];
 
   @Output()
@@ -22,5 +21,9 @@ export class TaskListComponent {
 
   updateStatusHandler(id: string) {
     this.updateStatus.emit(id);
+  }
+
+  setTaskStatus(status: string) {
+    this.taskStatus = status;
   }
 }

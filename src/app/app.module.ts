@@ -6,6 +6,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { FormsModule } from '@angular/forms';
+import { FiltersComponent } from './components/filters/filters.component';
+import { TaskStatusPipe } from './pipes/task-status.pipe';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     TaskListComponent,
     AddTaskComponent,
+    FiltersComponent,
+    TaskStatusPipe,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
