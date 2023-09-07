@@ -23,9 +23,9 @@
           <span
             class="badge rounded-pill text-uppercase font-weight-bold"
             [ngClass]="{
-              'bg-primary': task.priority === 'high',
-              'bg-success': task.priority === 'low',
-              'bg-warning': task.priority === 'neutral'
+              'bg-primary': task.priority === 'HIGH',
+              'bg-success': task.priority === 'LOW',
+              'bg-warning': task.priority === 'NEUTRAL'
             }"
             >{{ task.priority }}
           </span>

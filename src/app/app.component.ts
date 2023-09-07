@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Task, TASK_STATUS } from 'src/types';
+import { Task, TASK_PRIORITY, TASK_STATUS } from 'src/types';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +12,21 @@ export class AppComponent {
     {
       id: '1',
       name: 'Task 1',
-      priority: 'low',
+      priority: TASK_PRIORITY.LOW,
       status: TASK_STATUS.COMPLETE,
       date: new Date(),
     },
     {
       id: '2',
       name: 'Task 2',
-      priority: 'neutral',
+      priority: TASK_PRIORITY.NEUTRAL,
       status: TASK_STATUS.INCOMPLETE,
       date: new Date(),
     },
     {
       id: '3',
       name: 'Task 3',
-      priority: 'high',
+      priority: TASK_PRIORITY.HIGH,
       status: TASK_STATUS.INCOMPLETE,
       date: new Date(),
     },
