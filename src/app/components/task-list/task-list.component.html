@@ -34,8 +34,8 @@
           <span
             class="badge text-uppercase"
             [ngClass]="{
-            'bg-primary': task.status === 'incomplete',
-            'bg-success': task.status === 'complete',
+            'bg-primary': task.status === 'INCOMPLETE',
+            'bg-success': task.status === 'COMPLETE',
           }"
             >{{ task.status }}</span
           >
@@ -45,7 +45,7 @@
           <button
             type="button"
             class="btn btn-primary btn-sm"
-            *ngIf="task.status === 'complete'; else completeBtn"
+            *ngIf="task.status === 'COMPLETE'; else completeBtn"
             (click)="updateStatusHandler(task.id)"
           >
             Mark as undone

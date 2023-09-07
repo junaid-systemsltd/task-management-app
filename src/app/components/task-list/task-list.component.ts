@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from 'src/types';
+import { Task, TASK_STATUS } from 'src/types';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
 })
 export class TaskListComponent {
-  taskStatus: string = 'all';
+  readonly TASK_STATUS = TASK_STATUS;
+  taskStatus: string = TASK_STATUS.ALL;
   @Input() taskList: Task[] = [];
 
   @Output()
