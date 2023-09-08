@@ -16,7 +16,7 @@ export type Task = {
   name: string;
   priority: TASK_PRIORITY;
   status: TASK_STATUS;
-  date: Date;
+  date: string;
 };
 
 export type TaskFilter = {

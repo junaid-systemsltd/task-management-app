@@ -18,12 +18,19 @@ export class TaskListComponent {
   @Output()
   updateStatus: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  editTask: EventEmitter<string> = new EventEmitter<string>();
+
   deleteTaskHandler(id: string) {
     this.deleteTask.emit(id);
   }
 
   updateStatusHandler(id: string) {
     this.updateStatus.emit(id);
+  }
+
+  editTaskHandler(id: string) {
+    this.editTask.emit(id);
   }
 
   setTaskStatus(status: string) {
