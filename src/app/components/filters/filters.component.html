@@ -1,26 +1,52 @@
 <div class="row my-2">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <label>Search by name</label>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search task..." />
-      <button class="btn btn-primary" type="button" id="button-addon2">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search task..."
+        [(ngModel)]="searchTerm"
+      />
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onSearchTermHandler()"
+      >
         Search
       </button>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form-group">
       <label>Task Status:</label>
       <select
         class="form-select"
         name="status"
         [(ngModel)]="status"
-        (change)="onChangeHandler($event)"
+        (change)="onChangeHandler()"
       >
         <option disabled>Select Status:</option>
         <option value="ALL">All</option>
         <option value="COMPLETE">Complete</option>
         <option value="INCOMPLETE">Incomplete</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>Priority Status:</label>
+      <select
+        class="form-select"
+        name="priority"
+        [(ngModel)]="priority"
+        (change)="onPriorityChangeHandler()"
+      >
+        <option disabled>Select Priority:</option>
+        <option value="ALL">All</option>
+        <option value="LOW">Low</option>
+        <option value="NEUTRAL">Neutral</option>
+        <option value="HIGH">High</option>
       </select>
     </div>
   </div>

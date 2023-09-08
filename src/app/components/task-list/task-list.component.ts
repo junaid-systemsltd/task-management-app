@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task, TASK_STATUS } from 'src/types';
+import { Task, TASK_PRIORITY, TASK_STATUS } from 'src/types';
 
 @Component({
   selector: 'app-task-list',
@@ -8,6 +8,8 @@ import { Task, TASK_STATUS } from 'src/types';
 export class TaskListComponent {
   readonly TASK_STATUS = TASK_STATUS;
   taskStatus: string = TASK_STATUS.ALL;
+  taskPriority: string = TASK_PRIORITY.ALL;
+  searchText: string = '';
   @Input() taskList: Task[] = [];
 
   @Output()
@@ -26,5 +28,14 @@ export class TaskListComponent {
 
   setTaskStatus(status: string) {
     this.taskStatus = status;
+  }
+
+  setTaskPriority(priority: string) {
+    this.taskPriority = priority;
+  }
+
+  setSearchTerm(text: string) {
+    console.log({ text });
+    this.searchText = text;
   }
 }

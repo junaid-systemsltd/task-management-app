@@ -1,6 +1,11 @@
 <div class="my-2">
   <h4 class="text-uppercase">Tasks List</h4>
-  <app-filters (taskStatus) ="setTaskStatus($event)"/>
+  <app-filters 
+  (searchText) = "setSearchTerm($event)"
+  (taskStatus) ="setTaskStatus($event)"
+  (taskPriority) = "setTaskPriority($event)"
+  
+  />
   <table
     class="table table-hover"
     *ngIf="taskList.length > 0; else taskNotFound"
@@ -15,7 +20,7 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody *ngFor="let task of taskList | taskStatusFilter: taskStatus; let i=index">
+    <tbody *ngFor="let task of taskList | taskFilter: {status:taskStatus, name: searchText,priority: taskPriority}; let i=index">
       <tr class="table-light" *ngIf="taskList.length > 0">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ task.name }}</td>

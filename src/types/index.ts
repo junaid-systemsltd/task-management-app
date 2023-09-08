@@ -5,6 +5,7 @@ export enum TASK_STATUS {
 }
 
 export enum TASK_PRIORITY {
+  ALL = 'ALL',
   LOW = 'LOW',
   NEUTRAL = 'NEUTRAL',
   HIGH = 'HIGH',
@@ -16,4 +17,10 @@ export type Task = {
   priority: TASK_PRIORITY;
   status: TASK_STATUS;
   date: Date;
+};
+
+export type TaskFilter = {
+  name?: string;
+  priority?: string;
+  status?: string;
 };

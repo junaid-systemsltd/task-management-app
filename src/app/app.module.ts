@@ -7,7 +7,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { FormsModule } from '@angular/forms';
 import { FiltersComponent } from './components/filters/filters.component';
-import { TaskStatusPipe } from './pipes/task-status.pipe';
+import { TaskPipe } from './pipes/task-status.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { TaskStatusPipe } from './pipes/task-status.pipe';
     TaskListComponent,
     AddTaskComponent,
     FiltersComponent,
-    TaskStatusPipe,
+    TaskPipe,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
