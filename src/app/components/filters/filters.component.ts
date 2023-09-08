@@ -28,4 +28,14 @@ export class FiltersComponent {
   onSearchTermHandler() {
     this.searchText.emit(this.searchTerm);
   }
+
+  onClearFilterHandler() {
+    this.status = TASK_STATUS.ALL;
+    this.priority = TASK_PRIORITY.ALL;
+    this.searchTerm = '';
+
+    this.taskStatus.emit(this.status);
+    this.taskPriority.emit(this.priority);
+    this.searchText.emit(this.searchTerm);
+  }
 }
