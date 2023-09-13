@@ -1,16 +1,6 @@
 <app-navbar/>
 <div class="container">
-  <app-task-list 
-    [taskList]="tasksList" 
-    (editTask)="editTask($event)"
-    (deleteTask)="deleteTask($event)"
-    (updateStatus)="updateStatus($event)" 
-    />
-  <app-add-task 
-    (addTask)="addNewTask($event)"
-    (updateTask)="updateTask($event)"
-    [closeModal]="resetTask"
-    [isEditMode]="isEditMode"
-    [task]="task" 
-  />
+  <app-task-list />
+  <app-add-task />
 </div>
+<app-add-edit-modal/>

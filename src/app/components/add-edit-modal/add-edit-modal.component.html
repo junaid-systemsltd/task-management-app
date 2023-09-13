@@ -1,0 +1,102 @@
+<!--    Modal Add new Task  -->
+<div
+  class="modal"
+  id="taskModal"
+  tabindex="-1"
+  aria-labelledby="taskModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- MODAL HEADER SECTION -->
+      <div class="modal-header">
+        <h5 class="modal-title">{{ isEditMode ? "Edit" : "Add New" }} Task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="resetTask()"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- ADD EDIT TASK FORM SECTION -->
+        <form
+          novalidate
+          #formRef="ngForm"
+          (ngSubmit)="
+            isEditMode ? updateTaskHandler(task) : addTaskHandler(formRef)
+          "
+        >
+          <div class="row g-3">
+            <div class="col-sm-12">
+              <input
+                class="form-control form-control"
+                name="name"
+                #titleRef="ngModel"
+                placeholder="Name"
+                [(ngModel)]="task.name"
+                required
+              />
+            </div>
+            <div class="col-sm-12">
+              <select
+                class="form-select"
+                name="priority"
+                #statusRef="ngModel"
+                [(ngModel)]="task.priority"
+              >
+                <option value="HIGH">High</option>
+                <option value="NEUTRAL">Neutral</option>
+                <option value="LOW">Low</option>
+              </select>
+            </div>
+
+            <div class="col-sm-12">
+              <select
+                class="form-select"
+                name="status"
+                #statusRef="ngModel"
+                [(ngModel)]="task.status"
+              >
+                <option value="COMPLETE">Complete</option>
+                <option value="INCOMPLETE">InComplete</option>
+              </select>
+            </div>
+            <input
+              type="date"
+              class="form-control form-control"
+              name="date"
+              #dateRef="ngModel"
+              placeholder="Date"
+              [ngModel]="task.date"
+              required
+            />
+            <div class="col-sm-12 text-end">
+              <!-- IF EDIT MODE TRUE 'SAVE BUTTON' WILL SHOW ELSE 'ADD BUTTON' -->
+              <input
+                *ngIf="isEditMode; else addBtn"
+                type="submit"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                class="btn btn-primary"
+                value="Save"
+                [disabled]="formRef.invalid"
+              />
+              <ng-template #addBtn>
+                <input
+                  type="submit"
+                  class="btn btn-primary"
+                  value="Add"
+                  [disabled]="formRef.invalid"
+                />
+              </ng-template>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

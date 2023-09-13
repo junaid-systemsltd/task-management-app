@@ -1,4 +1,5 @@
 <div class="row my-2">
+  <!-- Name Filter -->
   <div class="col">
     <label>Search by name</label>
     <div class="input-group">
@@ -6,26 +7,17 @@
         type="text"
         class="form-control"
         placeholder="Search task..."
-        [(ngModel)]="searchTerm"
+        name="name"
+        [(ngModel)]="filters.name"
       />
-      <button
-        class="btn btn-primary"
-        type="button"
-        (click)="onSearchTermHandler()"
-      >
-        Search
-      </button>
     </div>
   </div>
+
+  <!-- Status Filter -->
   <div class="col-md-3">
     <div class="form-group">
       <label>Task Status:</label>
-      <select
-        class="form-select"
-        name="status"
-        [(ngModel)]="status"
-        (change)="onChangeHandler()"
-      >
+      <select class="form-select" name="status" [(ngModel)]="filters.status">
         <option disabled>Select Status:</option>
         <option value="ALL">All</option>
         <option value="COMPLETE">Complete</option>
@@ -33,14 +25,15 @@
       </select>
     </div>
   </div>
+
+  <!-- Priority Filter -->
   <div class="col-md-3">
     <div class="form-group">
       <label>Priority Status:</label>
       <select
         class="form-select"
         name="priority"
-        [(ngModel)]="priority"
-        (change)="onPriorityChangeHandler()"
+        [(ngModel)]="filters.priority"
       >
         <option disabled>Select Priority:</option>
         <option value="ALL">All</option>
@@ -50,11 +43,17 @@
       </select>
     </div>
   </div>
+
+  <!-- Reset Filter Button -->
   <div class="col-md-1">
     <div class="form-group">
       <label></label>
       <div class="input-group">
-        <button class="btn btn-light" title="Clear Filters" (click)="onClearFilterHandler()">
+        <button
+          class="btn btn-light"
+          title="Clear Filters"
+          (click)="resetFilters()"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"

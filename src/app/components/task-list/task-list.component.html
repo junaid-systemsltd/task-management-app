@@ -1,14 +1,9 @@
 <div class="my-2">
   <h4 class="text-uppercase">Tasks List</h4>
-  <app-filters 
-  (searchText) = "setSearchTerm($event)"
-  (taskStatus) ="setTaskStatus($event)"
-  (taskPriority) = "setTaskPriority($event)"
-  
-  />
+  <app-filters />
   <table
     class="table table-hover"
-    *ngIf="taskList.length > 0; else taskNotFound"
+    *ngIf="tasks.length > 0; else taskNotFound"
   >
     <thead>
       <tr class="table-primary">
@@ -20,80 +15,12 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody *ngFor="let task of taskList | taskFilter: {status:taskStatus, name: searchText,priority: taskPriority}; let i=index">
-      <tr class="table-light" *ngIf="taskList.length > 0">
-        <!-- ID -->
-        <th scope="row">{{ i + 1 }}</th>
-        <!-- Name -->
-        <td>{{ task.name }}</td>
-        <!-- Priority -->
-        <td>
-          <span
-            class="badge rounded-pill text-uppercase font-weight-bold"
-            [ngClass]="{
-              'bg-primary': task.priority === 'HIGH',
-              'bg-success': task.priority === 'LOW',
-              'bg-warning': task.priority === 'NEUTRAL'
-            }"
-            >{{ task.priority }}
-          </span>
-        </td>
-        <!-- Status -->
-        <td>
-          <span
-            class="badge text-uppercase"
-            [ngClass]="{
-            'bg-primary': task.status === 'INCOMPLETE',
-            'bg-success': task.status === 'COMPLETE',
-          }"
-            >{{ task.status }}</span
-          >
-        </td>
-        <!-- Date -->
-        <td>{{ task.date | date: "mediumDate" }}</td>
-        <!-- Actions -->
-        <td class="d-flex gap-2">
-          <!-- Mark as undone -->
-          <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            *ngIf="task.status === 'COMPLETE'; else completeBtn"
-            (click)="updateStatusHandler(task.id)"
-          >
-            Mark as undone
-          </button>
-          <!-- Mark as done -->
-          <ng-template #completeBtn>
-            <button
-              type="button"
-              class="btn btn-success btn-sm"
-              (click)="updateStatusHandler(task.id)"
-            >
-              Mark as done
-            </button>
-          </ng-template>
-          <!-- Edit -->
-          <button
-          type="button"
-          class="btn btn-info btn-sm"
-          (click)="editTaskHandler(task.id)"
-          data-bs-toggle="modal"
-          data-bs-target="#taskModal"
-        >
-          Edit
-        </button>
-        <!-- Delete -->
-          <button
-            type="button"
-            class="btn btn-danger btn-sm"
-            (click)="deleteTaskHandler(task.id)"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
+    <tbody *ngFor="let task of tasks | taskFilter: taskFilters; let i=index">
+        <tr class="task-list-item-component table-light" [index]="i" [task]="task"></tr>      
     </tbody>
   </table>
+  
+  <!-- This Template will show up if Tasks array length is zero -->
   <ng-template #taskNotFound>
     <div class="alert alert-dismissible alert-primary">
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

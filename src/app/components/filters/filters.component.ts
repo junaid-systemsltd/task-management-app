@@ -1,41 +1,25 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TASK_STATUS, TASK_PRIORITY } from 'src/types';
+import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
+import { TaskFilter } from 'src/types';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
 })
-export class FiltersComponent {
-  status: string = TASK_STATUS.ALL;
-  priority: string = TASK_PRIORITY.ALL;
-  searchTerm: string = '';
+export class FiltersComponent implements OnInit {
+  constructor(private taskService: TaskService) {}
 
-  @Output()
-  taskStatus: EventEmitter<string> = new EventEmitter<string>();
-  @Output()
-  taskPriority: EventEmitter<string> = new EventEmitter<string>();
-  @Output()
-  searchText: EventEmitter<string> = new EventEmitter<string>();
+  filters: TaskFilter = {};
 
-  onChangeHandler() {
-    this.taskStatus.emit(this.status);
+  ngOnInit() {
+    this.filters = this.taskService.getTaskFilters();
+    
+    this.taskService.onResetFiltersClicked.subscribe((filters) => {
+      this.filters = filters;
+    });
   }
 
-  onPriorityChangeHandler() {
-    this.taskPriority.emit(this.priority);
-  }
-
-  onSearchTermHandler() {
-    this.searchText.emit(this.searchTerm);
-  }
-
-  onClearFilterHandler() {
-    this.status = TASK_STATUS.ALL;
-    this.priority = TASK_PRIORITY.ALL;
-    this.searchTerm = '';
-
-    this.taskStatus.emit(this.status);
-    this.taskPriority.emit(this.priority);
-    this.searchText.emit(this.searchTerm);
+  resetFilters() {
+    this.taskService.resetFilters();
   }
 }

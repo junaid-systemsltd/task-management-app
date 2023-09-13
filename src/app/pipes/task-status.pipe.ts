@@ -7,6 +7,7 @@ import { Task, TaskFilter, TASK_STATUS } from 'src/types';
 })
 export class TaskPipe implements PipeTransform {
   transform(tasks: Task[], filter: TaskFilter) {
+    
     const _name = filter?.name || '';
     const _priority = filter?.priority || TASK_STATUS.ALL;
     const _status = filter?.status || TASK_STATUS.ALL;

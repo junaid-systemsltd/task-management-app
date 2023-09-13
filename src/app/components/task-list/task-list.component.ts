@@ -1,48 +1,27 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task, TASK_PRIORITY, TASK_STATUS } from 'src/types';
+import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
+import { Task, TaskFilter } from 'src/types';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
 })
-export class TaskListComponent {
-  readonly TASK_STATUS = TASK_STATUS;
-  taskStatus: string = TASK_STATUS.ALL;
-  taskPriority: string = TASK_PRIORITY.ALL;
-  searchText: string = '';
-  @Input() taskList: Task[] = [];
+export class TaskListComponent implements OnInit {
+  constructor(private taskService: TaskService) {}
 
-  @Output()
-  deleteTask: EventEmitter<string> = new EventEmitter<string>();
+  tasks: Task[] = [];
+  taskFilters: TaskFilter = {};
 
-  @Output()
-  updateStatus: EventEmitter<string> = new EventEmitter<string>();
+  ngOnInit() {
+    this.tasks = this.taskService.getTasks();
+    this.taskFilters = this.taskService.getTaskFilters();
 
-  @Output()
-  editTask: EventEmitter<string> = new EventEmitter<string>();
+    this.taskService.OnSaveTaskClicked.subscribe((tasks: Task[]) => {
+      this.tasks = tasks;
+    });
 
-  deleteTaskHandler(id: string) {
-    this.deleteTask.emit(id);
-  }
-
-  updateStatusHandler(id: string) {
-    this.updateStatus.emit(id);
-  }
-
-  editTaskHandler(id: string) {
-    this.editTask.emit(id);
-  }
-
-  setTaskStatus(status: string) {
-    this.taskStatus = status;
-  }
-
-  setTaskPriority(priority: string) {
-    this.taskPriority = priority;
-  }
-
-  setSearchTerm(text: string) {
-    console.log({ text });
-    this.searchText = text;
+    this.taskService.onResetFiltersClicked.subscribe((taskFilters) => {
+      this.taskFilters = taskFilters;
+    });
   }
 }
